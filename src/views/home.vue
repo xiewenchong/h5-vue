@@ -1,12 +1,10 @@
 <template>
 	<div class="home">
-		<img @click="openDialog" alt="Vue logo" src="@assets/logo.png" />
-		<HelloWorld msg="Welcome to Your Vue.js App" />
 		<p @click="changeUserInfo(233)">
 			vuex示例：
 			{{getUserInfo}}
 		</p>
-		<p @click="handleUrl">
+		<p @click="openDialog">
 			iconfont:
 			<i class="iconfont icon-weibo"></i>
 		</p>
@@ -76,9 +74,8 @@
 	// /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/.test('2019-12-06')
 	// /^[1-9]\d{3}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/.test('20191231')
 	// /^[1-9]\d{3}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(20|21|22|23|[0-1]\d)[0-5]\d$/.test('201912302020')
-	import HelloWorld from "@/components/HelloWorld";
 	import CountDown from "@/components/CountDown.vue";
-	import CountDown2 from "@/components/CountDown";
+	import CountDown2 from "@/components/CountDown.js";
 	import Dialog from "@/components/Dialog";
 	import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
 	import env from "@/config/env";
@@ -90,7 +87,6 @@
 	export default {
 		name: "home",
 		components: {
-			HelloWorld,
 			CountDown,
 			CountDown2,
 			Dialog
@@ -128,16 +124,25 @@
 			handleLang() {
 				this.$i18n.locale = this.$i18n.locale === "zh-CN" ? "en-US" : "zh-CN";
 			},
-			timeStart() {},
-			timeEnd() {},
-			tweenJS() {
-				let frameHandler;
-
+			timeStart() {
 				function animate(time) {
 					frameHandler = requestAnimationFrame(animate);
 					TWEEN.update(time); // time表示多长时间执行一次
 				}
+			},
+			handleDialog() {
+				this.showDialog = true;
+			},
+			handleI18n() {
+				this.$i18n.locale = this.$i18n.locale === "en-US" ? "zh-CN" : "en-US";
+			},
 
+			tweenJS() {
+				let frameHandler;
+				function animate(time) {
+					frameHandler = requestAnimationFrame(animate);
+					TWEEN.update(time); // time表示多长时间执行一次
+				}
 				// 创建补间动画
 				let that = this;
 				let tween = new TWEEN.Tween({ num: 0 })
@@ -152,7 +157,6 @@
 						cancelAnimationFrame(frameHandler);
 					})
 					.start();
-
 				// 开始补间动画
 				animate();
 			},
@@ -184,17 +188,35 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "~@/assets/iconfont/iconfont.css";
-
 	.home {
 		display: flex;
 		flex-flow: column;
-		align-items: center;
+		justify-content: center;
+		font-size: 14px;
 		text-align: center;
 		line-height: 1.2;
-        // background: url(~@assets/logo.png) no-repeat center; /*css使用alias示例*/
+		p {
+			margin: 20px auto;
+		}
+		.swiper {
+			width: 100%;
+			height: 200px; /*no*/
+			.swiper-item {
+				height: 200px; /*no*/
+				line-height: 200px; /*no*/
+			}
+		}
+		.border {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100px;
+			height: 200px;
+			margin: 20px auto;
+			position: relative;
+			@include border();
+		}
 	}
-
 	.dialog-content {
 		width: 300px;
 		height: 180px;

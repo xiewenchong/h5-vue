@@ -50,6 +50,30 @@ yarn push
     - views             // 页面目录
 ```
 
+## 组件库
+
+[cube-ui](https://didi.github.io/cube-ui/#/zh-CN)
+
+[vant](https://youzan.github.io/vant/#/zh-CN/intro)
+
+## 移动端适配
+
+移动端适配采用 [amfe-flexible](https://github.com/amfe/lib-flexible)，在 main.js 中引入，使用的时候按照设计稿，在package.json中找到"postcss-px2rem"，然后将设计稿的尺寸除以10，输进去，插件会自动实现rem的转换。
+
+Tips：如果需要使用 px 作为单位，可以把 PX 大写，或者在后面加 /* no */
+
+## 其他组件
+
+[vue-awesome-swiper 滚动组件库](https://github.com/surmon-china/vue-awesome-swiper)
+
+[xgplayer 西瓜播放器](https://h5player.bytedance.com/)
+
+[html2canvas](https://html2canvas.hertzen.com/)
+
+[qrcodeJs - 生成二维码](https://www.jianshu.com/p/2e5e2f5a091c)
+
+[Animate.css](https://daneden.github.io/animate.css/)
+
 ## 推荐规范
 
 1、命名
